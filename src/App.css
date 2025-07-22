@@ -1,16 +1,20 @@
-/* loyaltycard.css */
+/* Enhanced loyaltycard.css */
 
 /* 1. Modern Vibrant Variables */
 :root {
-  --bg-color: #181c24;
-  --card-bg: rgba(30, 34, 44, 0.95);
+  --bg-color: #161a23;
+  --card-bg: rgba(34, 39, 54, 0.97);
   --text-color: #f3f6fa;
-  --accent-color: #6c47ff;
-  --accent-color-hover: #8f6bff;
-  --input-bg: rgba(255, 255, 255, 0.08);
-  --shadow-color: 0 8px 32px 0 rgba(108, 71, 255, 0.18);
+  --accent-color: #ff7e5f;
+  --accent-color-hover: #feb47b;
+  --input-bg: rgba(255, 255, 255, 0.10);
+  --shadow-color: 0 8px 32px 0 rgba(255, 126, 95, 0.15);
   --border-color: #2e3650;
   --label-color: #b6b8d6;
+  --info-bg: #232a3a;
+  --info-border: #ff7e5f;
+  --success-bg: #1e2e1e;
+  --success-color: #baffc9;
 }
 
 @media (prefers-color-scheme: light) {
@@ -18,12 +22,16 @@
     --bg-color: #f7f9fc;
     --card-bg: rgba(255, 255, 255, 0.98);
     --text-color: #23243a;
-    --accent-color: #6c47ff;
-    --accent-color-hover: #4e2bbd;
-    --input-bg: rgba(108, 71, 255, 0.07);
-    --shadow-color: 0 8px 32px 0 rgba(108, 71, 255, 0.10);
+    --accent-color: #ff7e5f;
+    --accent-color-hover: #feb47b;
+    --input-bg: rgba(255, 126, 95, 0.07);
+    --shadow-color: 0 8px 32px 0 rgba(255, 126, 95, 0.10);
     --border-color: #e3e6f0;
     --label-color: #5e5e7a;
+    --info-bg: #fff7f0;
+    --info-border: #ff7e5f;
+    --success-bg: #eafff2;
+    --success-color: #1e6b3a;
   }
 }
 
@@ -57,33 +65,78 @@ body {
 /* 3. Container & Typography */
 .container {
   width: 100%;
-  max-width: 480px;
+  max-width: 500px;
   background: var(--card-bg);
-  border-radius: 18px;
+  border-radius: 22px;
   box-shadow: var(--shadow-color);
-  padding: 2.5rem 2rem 2rem 2rem;
-  border: 1.5px solid var(--border-color);
-  backdrop-filter: blur(16px);
+  padding: 2.7rem 2.2rem 2.2rem 2.2rem;
+  border: 2px solid var(--border-color);
+  backdrop-filter: blur(18px);
   margin-top: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, var(--accent-color) 0%, transparent 70%);
+  opacity: 0.08;
+  z-index: 0;
+  pointer-events: none;
 }
 
 h1, h2 {
   margin-bottom: 1rem;
   letter-spacing: 0.5px;
   font-weight: 700;
+  z-index: 1;
+  position: relative;
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   text-align: center;
   color: var(--accent-color);
   margin-bottom: 2rem;
+  background: linear-gradient(90deg, var(--accent-color), var(--accent-color-hover));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 h2 {
   font-size: 1.25rem;
   margin-top: 1.5rem;
   color: var(--text-color);
+}
+
+/* Informative Banner */
+.info-banner {
+  background: var(--info-bg);
+  border-left: 5px solid var(--info-border);
+  color: var(--accent-color);
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 8px rgba(255, 126, 95, 0.07);
+  z-index: 1;
+  position: relative;
+}
+
+.success-banner {
+  background: var(--success-bg);
+  color: var(--success-color);
+  border-left: 5px solid #4caf50;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.07);
+  z-index: 1;
+  position: relative;
 }
 
 /* 4. Forms & Inputs */
@@ -94,9 +147,10 @@ h2 {
 label {
   display: block;
   margin-bottom: 0.25rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--label-color);
   letter-spacing: 0.03em;
+  font-size: 1.02rem;
 }
 
 input[type="text"],
@@ -107,11 +161,11 @@ select {
   background: var(--input-bg);
   color: var(--text-color);
   border: 1.5px solid var(--border-color);
-  border-radius: 8px;
-  padding: 0.85rem 1.1rem;
-  margin-bottom: 1.2rem;
-  box-shadow: 0 2px 8px rgba(108, 71, 255, 0.07);
-  font-size: 1rem;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.3rem;
+  box-shadow: 0 2px 8px rgba(255, 126, 95, 0.09);
+  font-size: 1.07rem;
   transition: box-shadow 0.3s, border 0.3s, background 0.3s;
 }
 
@@ -120,8 +174,8 @@ textarea:focus,
 select:focus {
   outline: none;
   border: 1.5px solid var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.13);
-  background: rgba(108, 71, 255, 0.04);
+  box-shadow: 0 0 0 3px rgba(255, 126, 95, 0.13);
+  background: rgba(255, 126, 95, 0.06);
 }
 
 /* 5. Buttons */
@@ -132,14 +186,15 @@ button {
   color: #fff;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 0.9rem;
+  padding: 1rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 1.08rem;
+  font-size: 1.12rem;
   letter-spacing: 0.04em;
-  box-shadow: 0 4px 16px rgba(108, 71, 255, 0.18);
+  box-shadow: 0 4px 16px rgba(255, 126, 95, 0.18);
   transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  margin-top: 0.5rem;
 }
 
 button:disabled {
@@ -151,8 +206,8 @@ button:disabled {
 
 button:not(:disabled):hover {
   background: linear-gradient(90deg, var(--accent-color-hover), var(--accent-color));
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 24px rgba(108, 71, 255, 0.22);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(255, 126, 95, 0.22);
 }
 
 /* 6. Accessibility & Performance */
@@ -176,4 +231,109 @@ button:not(:disabled):hover {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
+}
+
+/* 8. Helper: Add spacing for ConnectButton */
+.connect-btn-wrapper {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* 9. Responsive Design */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    max-width: 98vw;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.wallet-info-box {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.97rem;
+  box-shadow: 0 2px 8px rgba(255, 126, 95, 0.10);
+  z-index: 10;
+  min-width: 180px;
+  text-align: left;
+  opacity: 0.96;
+}
+
+.wallet-info-hover-area {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+.wallet-info-box {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.97rem;
+  box-shadow: 0 2px 8px rgba(255, 126, 95, 0.10);
+  min-width: 180px;
+  text-align: left;
+  opacity: 0.96;
+  transition: opacity 0.2s, visibility 0.2s;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.wallet-info-hover-area {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+.wallet-info-box {
+  background: var(--card-bg);
+  color: var(--text-color);
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.97rem;
+  box-shadow: 0 2px 8px rgba(255, 126, 95, 0.10);
+  min-width: 180px;
+  text-align: left;
+  opacity: 0.96;
+  transition: opacity 0.2s, visibility 0.2s;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.wallet-info-hover-area:hover .wallet-info-box,
+.wallet-info-hover-area:focus-within .wallet-info-box {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wallet-info-hover-area::before {
+  content: "👛";
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: block;
+  text-align: right;
+  color: var(--accent-color);
+}
+
+.wallet-info-hover-area:hover::before,
+.wallet-info-hover-area:focus-within::before {
+  content: "";
 }
